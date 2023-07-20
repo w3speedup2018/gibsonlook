@@ -1,0 +1,36 @@
+<!-- Footer scripts -->
+<script type="lazyload2" data-src="{{ 'vendor.min.js' | asset_url }}"></script>
+<script type="lazyload2" data-src="{{ 'api.jquery.js' | asset_url }}"></script>
+<script type="lazyload2" data-src="{{ 'option_selection.js' | shopify_asset_url }}" defer></script>
+{%  render 'new-currency' %}
+<script type="lazyload2" data-src="{{ 'jquery.sticky.js' | asset_url }}"></script>
+<script type="lazyload2" data-src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script type="lazyload2" data-src="{{ 'halo.js' | asset_url }}"></script>
+
+
+{% if template contains 'collection' %}
+<script type="lazyload2">
+  setTimeout(function(){
+    $('.dropdown-cat a').each(function(){
+      if($(this).hasClass('active')) {
+        $(this).parents('li').addClass('open');
+      }
+    });
+  })
+</script>
+{% endif %}
+{% if settings.redirect_button == 'none' %}
+<script type="lazyload2">
+  setTimeout(function(){
+    $("#reload_page").on("click", function(){
+      $('html').removeClass("cart-show");
+    });
+  })
+</script>
+{% endif %}
+<script type="lazyload2">
+setTimeout(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>

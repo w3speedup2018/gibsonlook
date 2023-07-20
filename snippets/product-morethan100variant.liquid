@@ -1,0 +1,59 @@
+{% render 'pdp-v2-style' %}
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#pair-with').addEventListener('click', () => {
+        const recommendedProducts = document.querySelector('.evm-recommended-products');
+        const faqProducts = document.querySelector('.evm-also-bought-products');
+
+        document.querySelector('#pair-with').classList.add('active');
+        document.querySelector('#more-blouses').classList.remove('active');
+
+        if (recommendedProducts) {
+            recommendedProducts.classList.add("active");
+            recommendedProducts.classList.remove("in-active");
+        }
+
+        if (faqProducts) {
+            faqProducts.classList.remove("active");
+        }
+    });
+
+    document.querySelector('#more-blouses').addEventListener('click', () => {
+        const faqProducts = document.querySelector('.evm-also-bought-products');
+        const recommendedProducts = document.querySelector('.evm-recommended-products');
+
+        document.querySelector('#more-blouses').classList.add('active');
+        document.querySelector('#pair-with').classList.remove('active');
+
+        if (faqProducts) {
+            faqProducts.classList.add("active");
+        }
+
+        if (recommendedProducts) {
+            recommendedProducts.classList.add("in-active");
+        }
+    });
+});
+  
+</script>
+
+{% assign blocks = section.blocks | where: 'type', 'recommend' %}
+{% assign block = blocks[0] %}
+<div class="product-template product-template-surfup">
+  <div class="container">
+<!--     {% render 'breadcrumb' %} -->
+    <div class="halo-product-content">
+      <div class="row pro-page">
+        {% render 'product-template-morethan100variant', product: product, enable_compare_color: enable_compare_color, show_compare_color: show_compare_color, enable_hot_stock: enable_hot_stock, option_color_swatch: option_color_swatch %}
+        {% render 'product-banner' %}
+      </div>
+
+      {% if block.settings.display_related_products %}
+        {% render 'related-products', block: block, product: product %}
+      {% endif %}
+     
+    </div>   
+  </div>
+</div>

@@ -1,0 +1,17 @@
+
+<div class="collection-template collection-template-no-sidebar">
+    {% render 'collection-header' %}
+    <div class="container">
+        {% render 'breadcrumb' %}
+    </div>
+    <div class="halo-collection-content">
+        <div class="bg-filter">
+            <div class="container">
+                {% render 'filter-no-sidebar' %}   
+            </div>
+        </div>
+        <div class="container">
+            {% render 'collection-template-no-sidebar' %}
+        </div>        
+    </div>
+</div>

@@ -1,0 +1,225 @@
+{% assign sca_product = product %}{% assign sca_product_id_text = "," | append : sca_product.id | append : "," %}{% assign sca_price = sca_product.price %}{% assign sca_price_min = sca_product.price_min %}{% assign sca_price_max = sca_product.price_max %}{% assign sca_compare_at_price = sca_product.compare_at_price %}{% assign sca_compare_at_price_min = sca_product.compare_at_price_min %}{% assign sca_compare_at_price_max = sca_product.compare_at_price_max %}{% assign sca_product_available = sca_product.available %}{% assign sca_product_variantCount = sca_product.variants.size %}{% assign sca_compare_at_price_varies = sca_product.compare_at_price_varies %}{% assign sca_price_varies = sca_product.price_varies %}{% assign sca_has_only_default_variant = false %}{% capture sca_product_variants_json %}{{sca_product.variants | json }}{% endcapture %} {% capture sca_product_json %}{ {% if sca_all_gift_products_ids == null or sca_all_gift_products_ids contains sca_product_id_text %}{% assign sca_product_available = false %}{% assign sca_product_variantCount = 0 %}{% assign sca_has_only_default_variant = true %}{% assign sca_is_first_variant = true %}{% capture sca_variants_json %} [{% for variant in sca_product.variants %}{% unless variant.metafields.secomapp.freegifts %}{% unless variant.title contains '(Freegifts)' %}{% unless variant.title contains '% Off' %}{% unless variant.metafields.shappify_qb.qb_hide == "1" %}{% unless variant.metafields.shappify_bundle.is_bundle == "true" %}{% unless variant.metafields.brodev_scn.hide == "true" %}{% unless variant.metafields.wholesaler2.wholesale %}{% unless variant.metafields.Wholesaler.level %}{% unless variant.title contains '(Wholesale' %}{% if sca_is_first_variant%} {{ variant | json }}{% assign sca_price = variant.price %} {% assign sca_price_min = variant.price %} {% assign sca_price_max = variant.price %} {% assign sca_compare_at_price = variant.compare_at_price %} {% assign sca_compare_at_price_min = variant.compare_at_price %} {% assign sca_compare_at_price_max = variant.compare_at_price %} {% assign sca_product_available = variant.available %} {% assign sca_product_variantCount = 1 %} {% assign sca_is_first_variant = false%}{% else %},{{variant | json }} {% if sca_price_min >= variant.price %} {% assign sca_price_min = variant.price %} {% assign sca_price = variant.price %}{% endif %} {% if sca_price_max <= variant.price %} {% assign sca_price_max = variant.price %} {% endif %} {% if variant.compare_at_price %} {% if sca_compare_at_price_min==null or sca_compare_at_price_min >= variant.compare_at_price %} {% assign sca_compare_at_price_min = variant.compare_at_price %} {% assign sca_compare_at_price = variant.compare_at_price %} {% endif %} {% if sca_compare_at_price_max==null or sca_compare_at_price_max < variant.compare_at_price %} {% assign sca_compare_at_price_max = variant.compare_at_price %} {% endif %} {% endif %} {% if variant.available == true %} {% assign sca_product_available = true %} {% endif %} {% assign sca_product_variantCount = sca_product_variantCount | plus: 1 %}{% endif %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{% endunless %}{%endfor%} ]{% endcapture %}{% if sca_price_min < sca_price_max %}{% assign sca_price_varies = true %}{% else %}{% assign sca_price_varies = false %}{% endif %}{% if sca_compare_at_price_min < sca_compare_at_price_max %}{% assign sca_compare_at_price_varies = true %}{% else %}{% assign sca_compare_at_price_varies = false %}{% endif %}{% if sca_product_variantCount > 1 %}{% assign sca_has_only_default_variant = false %}{% endif %}{% if sca_product_variantCount == sca_product.variants.size %} "variants":{{ sca_product.variants }},{% else %}{%assign sca_product_variants_json = sca_variants_json %} "variants":{{ sca_variants_json }},{% endif %}{% else %} "variants":{{ sca_product_variants_json }},{% endif %} "id": {{sca_product.id}}, "title": {{sca_product.title | json}}, "handle": {{sca_product.handle | json}}, "description": {{sca_product.description | json}}, "published_at": "{{sca_product.published_at | date: "%Y-%m-%dT%H-%M-%S%:z" }}", "created_at": "{{sca_product.created_at | date: "%Y-%m-%dT%H-%M-%S%:z" }}", "vendor": {{sca_product.vendor | json}}, "type": {{sca_product.type | json}}, "tags": {{sca_product.tags | json}}, "price": {{sca_price}}, "price_min": {{sca_price_min}}, "price_max": {{sca_price_max}}, "available": {{sca_product.available}}, "price_varies": {{sca_price_varies}}, "compare_at_price": {{sca_compare_at_price}}, "compare_at_price_min": {{sca_compare_at_price_min}}, "compare_at_price_max": {{sca_compare_at_price_max}}, "compare_at_price_varies": {{sca_compare_at_price_varies}}, "images": {{sca_product.images | json}}, "featured_image": {{sca_product.featured_image | json }}, "options": {{sca_product.options | json}}, "media": {{sca_product.media | json }}, "content": {{sca_product.content | json }}} {% endcapture sca_product_json %}
+
+{%- liquid
+  assign on_sale = false
+  if sca_compare_at_price_min > sca_price_min
+    assign on_sale = true
+  endif
+  assign sold_out = true
+  if product.available
+    assign sold_out = false
+  endif
+  assign option_color_swatch = settings.option_color_swatch | downcase
+  assign url = ''
+  for option in product.options_with_values
+      assign option_name = option.name | downcase
+      if option_color_swatch contains option_name
+          assign product_option = option
+          assign index = forloop.index0
+          assign position = forloop.index | minus: 1
+          assign select = option.selected_value
+          for variant in product.variants limit: 1
+             unless variant.metafields.secomapp.freegifts 
+             unless variant.title contains '% off)' 
+
+            if variant.image != null  
+              assign url = variant.image.src
+            endif
+            endunless
+            endunless
+          endfor
+          break
+      else 
+          assign position = 0
+      endif
+  endfor
+  if sectionId == blank 
+    assign sectionId = section.id
+  endif
+-%}
+
+
+<div class="inner product-item{% if sold_out %} sold-out{% endif %}{% if on_sale %} on-sale{% endif %}{% if settings.style_product_grid == 'style_product_grid_5'%} layout_2{%endif%}" data-product-id="product-{{ product.id }}" data-json-product='{"id": {{product.id}},"handle": "{{product.handle}}","media": {{product.media | json}},"variants": {{ product.variants | json }}}'>
+  <div class="inner-top">
+    <div class="product-top">
+      <div class="product-image{% if product.images.size > 1 and settings.image_swap %} image-swap{% endif %}">
+        <a href="{{ product.url | within: collection }}" class="product-grid-image adaptive_height" data-collections-related="{{ routes.collections_url }}/{{collection.handle}}?view=related" {% unless settings.product_image_resize %}style="padding-top: {{ 1 | divided_by: product.featured_image.aspect_ratio | times: 100 }}%"{% endunless %}>
+          {% render 'image-size', product: product, img: url %}
+        </a>
+      </div>
+
+      {% render 'product-label' with product as product, serial: serial %}
+
+      {% comment %} Use for productGrid {% endcomment %}
+      <div class="product-des abs-center">
+        {% render 'wishlist-product' with product as product %}
+
+        {% if settings.style_product_grid == 'style_product_grid_1'%}
+          {% if settings.display_button %}
+          <div class="action">
+            {% render 'add-to-cart-form', product: product, sold_out: sold_out, id: 'grid-product-form-', position: position, sectionId: sectionId %}
+          </div>
+          {% endif %}
+
+          {% if settings.display_product_reviews %}
+          <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      {% if settings.display_item_size or settings.enable_quick_view %}
+      <div class="product-des abs-bottom">
+        {% if settings.display_item_size %}
+        {% render 'items-size' with product as product %}
+        {% endif %}
+
+        {% if settings.enable_quick_view %}
+        <a class="quickview-button" href="javascript:void(0)" id="{{ product.handle }}" title="{{ 'products.product.quick_view' | t }}" {% if settings.enable_multilang %}data-translate="products.product.quick_view" translate-item="title"{% endif %}>
+          <span {% if settings.enable_multilang %}data-translate="products.product.quick_view"{% endif %}>
+            {{ 'products.product.quick_view' | t }}
+          </span>
+        </a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+
+    {% comment %} Use for productGrid {% endcomment %}
+    <div class="product-bottom">
+      
+      <div class="wrapper-compare {% if settings.show_vendor %}enable_vendor{% endif %}">
+        {% if settings.show_vendor %}
+          <div class="product-vendor">
+            {{ product.vendor | link_to_vendor }}
+          </div>
+        {% endif %}
+        {% if settings.enable_compare_product and template == 'collection' %}
+          {% render 'compare-product' with product as product %}
+        {% endif %}
+      </div>
+
+      <a class="product-title {% if select != blank %}change-text{% endif %}" href="{{ product.url | within: collection }}">
+        {% render 'multilang' with product.title %}
+        {% if select != blank %}<span data-change-title> - {{ select }}</span>{% endif %}
+      </a>
+
+      {% if settings.style_product_grid == 'style_product_grid_5'%}
+        {% if settings.display_product_reviews %}
+          <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+        {% endif %}
+      {% endif %}
+
+      <div class="price-box">
+        {% if on_sale %}
+        <div class="price-sale">
+          {% if settings.enable_quick_shop %}
+            <span class="old-price" data-compare-price-grid>{{ product.variants[0].compare_at_price | money }}</span>
+            <span class="special-price" data-price-grid>{{ product.variants[0].price | money }}</span>
+          {% else %}
+            <span class="old-price" >{{ sca_compare_at_price_min | money }}</span>
+            <span class="special-price">
+              {% if sca_price_varies %}{% render 'varies_from' %}{% endif %}{{ sca_price_min | money }}
+            </span>
+          {% endif %}
+        </div>
+        {% else %}
+          {% if settings.enable_quick_shop %}
+          <div class="price-regular">
+            <span data-price-grid>{{ product.variants[0].price | money }}</span>
+          </div>
+          {% else %}
+          <div class="price-regular">
+            <span>{% if sca_price_varies %}{% render 'varies_from' %}{% endif %}{{ sca_price_min | money }}</span>
+          </div>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      {% if settings.display_item_swatch %}
+      {% render 'item-swatch', product: product, option_color_swatch: option_color_swatch, downcased_option: option_name, product_option: product_option, index: index %}
+      {% endif %}
+
+      {% if settings.style_product_grid == 'style_product_grid_5'%}
+        <div class="action">
+          {% render 'add-to-cart-form', product: product, sold_out: sold_out, id: 'grid-product-form-', position: position, sectionId: sectionId %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% comment %} Use for productList {% endcomment %}
+    <div class="product-details">
+      {% if settings.show_vendor %}
+      <div class="product-vendor">
+        {{ product.vendor | link_to_vendor }}
+      </div>
+      {% endif %}
+
+      <a class="product-title {% if select != blank %}change-text{% endif %}" href="{{ product.url | within: collection }}">
+        {% render 'multilang' with product.title %}
+        {% if select != blank %}<span data-change-title> - {{ select }}</span>{% endif %}
+      </a>
+
+      {% if settings.display_product_reviews %}
+      <span class="shopify-product-reviews-badge" data-id="{{ product.id }}" style="min-height: 20px; display: block; margin-bottom: 9px;"></span>
+      {% endif %}
+
+      <div class="short-description">
+        {% if product.description contains '[countdown]' %}
+        {% assign des = product.description | split:'[/countdown]' | last %}
+        {% else %}
+        {% assign des = product.description %}
+        {% endif %}
+        <div>
+          {{ des | split: '[lang2]' | first | strip_html | truncatewords: 40 }}
+        </div>
+      </div>
+
+      <div class="price-box">
+        {% if on_sale %}
+        <div class="price-sale">
+          {% if settings.enable_quick_shop %}
+            <span class="old-price" data-compare-price-grid>{{ product.variants[0].compare_at_price | money }}</span>
+            <span class="special-price" data-price-grid>{{ product.variants[0].price | money }}</span>
+          {% else %}
+            <span class="old-price" >{{ sca_compare_at_price_min | money }}</span>
+            <span class="special-price">
+              {% if sca_price_varies %}{% render 'varies_from' %}{% endif %}{{ sca_price_min | money }}
+            </span>
+          {% endif %}
+        </div>
+        {% else %}
+          {% if settings.enable_quick_shop %}
+          <div class="price-regular">
+            <span data-price-grid>{{ product.variants[0].price | money }}</span>
+          </div>
+          {% else %}
+          <div class="price-regular">
+            <span>{% if sca_price_varies %}{% render 'varies_from' %}{% endif %}{{ sca_price_min | money }}</span>
+          </div>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      {% if settings.display_item_swatch %}
+      {% render 'item-swatch', product: product, option_color_swatch: option_color_swatch, downcased_option: option_name, product_option: product_option, index: index %}
+      {% endif %}
+
+      <div class="wrapper-button-card">
+        {% if settings.display_button %}
+        <div class="action">
+          {% render 'add-to-cart-form', product: product, sold_out: sold_out, id: 'list-product-form', list: 'list', position: position, sectionId: sectionId %}
+        </div>
+        {% endif %}
+
+        {% render 'wishlist-product' with product as product %}
+      </div>
+
+      {% if settings.enable_compare_product and template == 'collection' %}
+        <div class="wrapper-compare">
+          {% render 'compare-product' with product as product %}
+        </div>
+      {% endif %}
+      
+    </div>
+  </div>
+{% render 'preorder-now-collection-item', product: product %}</div>

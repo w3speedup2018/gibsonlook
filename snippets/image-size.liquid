@@ -1,0 +1,55 @@
+{% if img != blank %}
+  {% assign image_first = img %}
+{% else %}
+  {% assign image_first = product.images[0].src %}
+{% endif %}
+{% assign has_video = product.media | where: 'media_type','video' %}
+{% if product.images.size > 1 and settings.image_swap %}
+    <img alt="{{ product.images[0].alt | escape }}"
+       class="images-one lazyloaded lazy3 lazy2"
+       src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+       data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+       data-aspectratio="{{ product.featured_image.aspect_ratio }}"
+       data-sizes="auto"
+       data-srcset="{{ image_first | img_url: '360x' }} 360w,
+                    {{ image_first | img_url: '540x' }} 540w,
+                    {{ image_first | img_url: '720x' }} 720w,
+                    {{ image_first | img_url: '900x' }} 900w"
+       data-image>
+  <span class="images-two">
+    
+    {% if has_video != blank and settings.enable_hover_video_product_items %}
+    {{ has_video[0] | video_tag: muted: true, loop: true, image_size: '50x' }}
+    {% else %}
+      <img alt="{{ product.images[1].alt | escape }}"
+           class="lazyloaded lazy2"
+           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+           data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+           data-aspectratio="{{ product.featured_image.aspect_ratio }}"
+           data-sizes="auto"
+           data-srcset="{{ product.images[1].src | img_url: '360x' }} 360w,
+                        {{ product.images[1].src | img_url: '540x' }} 540w,
+                        {{ product.images[1].src | img_url: '720x' }} 720w,
+                        {{ product.images[1].src | img_url: '900x' }} 900w"
+           data-image
+           >
+    
+    {% endif %}
+  </span>
+{% else %}
+  
+
+    <img alt="{{ product.featured_image.alt | escape }}"
+       class="lazyloaded lazy2 lazy3"
+       src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+       data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+       data-aspectratio="{{ product.featured_image.aspect_ratio }}"
+       data-sizes="auto"
+       data-srcset="{{ image_first | img_url: '360x' }} 360w,
+                    {{ image_first | img_url: '540x' }} 540w,
+                    {{ image_first | img_url: '720x' }} 720w,
+                    {{ image_first | img_url: '900x' }} 900w"
+       data-image
+       >
+  
+{% endif %}
