@@ -1,16 +1,3 @@
-{% if template contains 'index' %}
-    {% render 'homepage-critical-css' %}
-{% elsif template contains 'collection' %}
-    {% render 'collection-critical-css' %}
-{% elsif template contains 'product' %}
-    {% render 'product-critical-css' %}
-{% else %}
-	{% render 'vendor-min-css' %}
-    {% render 'theme-styles-css' %}
-    {% render 'theme-styles-css2' %}
-    {% render 'theme-styles-responsive-css' %}
-    {% render 'theme-styles-responsive-css2' %}
-    {% render 'theme-setting-css' %}
     {% if settings.layout_style == 'layout_style_1170' %}
     	{% render 'layout-style-1170-css' %}
     {% endif %}
@@ -62,79 +49,78 @@
     {% if settings.layout_style == 'layout_style_surfup' %}
     	{% render 'layout-style-surfup-css' %}
     {% endif %}
-    {% render 'custom-css' %}
-{% endif %}
-<link rel="stylesheet" data-href="{{ 'vendor.min.css' | asset_url }}">
-<link rel="stylesheet" data-href="{{ 'theme-styles.css' | asset_url }}">
-<link rel="stylesheet" data-href="{{ 'theme-styles-responsive.css' | asset_url }}">
-<link rel="stylesheet" data-href="{{ 'theme-settings.css' | asset_url }}">
+
+<link rel="stylesheet" href="{{ 'vendor.min.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'theme-styles.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'theme-styles-responsive.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'theme-settings.css' | asset_url }}">
 
 
 {% if settings.layout_style == 'layout_style_1170' %}
-	<link rel="stylesheet" data-href="{{ 'layout_style_1170.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'layout_style_1170.css' | asset_url }}">
 {% endif %}
 
 {% if settings.header_layout == '05' %}
-	<link rel="stylesheet" data-href="{{ 'header-05.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'header-05.css' | asset_url }}">
 {% endif %}
 
 {% if settings.header_layout == '06' %}
-	<link rel="stylesheet" data-href="{{ 'header-06.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'header-06.css' | asset_url }}">
 {% endif %}
 
 {% if settings.header_layout == '07' %}
-	<link rel="stylesheet" data-href="{{ 'header-07.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'header-07.css' | asset_url }}">
 {% endif %}
 
 {% if settings.header_layout == '08' %}
-	<link rel="stylesheet" data-href="{{ 'header-08.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'header-08.css' | asset_url }}">
 {% endif %}
 
 {% if settings.footer_layout == '06' %}
-	<link rel="stylesheet" data-href="{{ 'footer-06.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'footer-06.css' | asset_url }}">
 {% endif %}
 
 {% if settings.footer_layout == '07' %}
-	<link rel="stylesheet" data-href="{{ 'footer-07.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'footer-07.css' | asset_url }}">
 {% endif %}
 
 {% if settings.footer_layout == '08' %}
-	<link rel="stylesheet" data-href="{{ 'footer-08.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'footer-08.css' | asset_url }}">
 {% endif %}
 
 {% if settings.footer_layout == '09' %}
-	<link rel="stylesheet" data-href="{{ 'footer-09.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'footer-09.css' | asset_url }}">
 {% endif %}
 
 {% if settings.product_layout == 'skin_1' or template.suffix == 'skin-1' %}
-	<link rel="stylesheet" data-href="{{ 'product-skin.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'product-skin.css' | asset_url }}">
 {% endif %}
 
 {% if settings.product_layout == 'supermarket' or template.suffix == 'supermarket' %}
-	<link rel="stylesheet" data-href="{{ 'product-supermarket.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'product-supermarket.css' | asset_url }}">
 {% endif %}
 
 {% if settings.product_layout == 'surfup' or template.suffix == 'product-08' %}
-	<link rel="stylesheet" data-href="{{ 'product-surfup.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'product-surfup.css' | asset_url }}">
 {% endif %}
 
 {% if settings.category_layout == 'supermarket' or template.suffix == 'supermarket' %}
-	<link rel="stylesheet" data-href="{{ 'category-supermarket.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'category-supermarket.css' | asset_url }}">
 {% endif %}
 
 {% if settings.layout_style == 'layout_style_fullwidth' %}
-	<link rel="stylesheet" data-href="{{ 'layout_style_fullwidth.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'layout_style_fullwidth.css' | asset_url }}">
 {% endif %}
 
 {% if settings.layout_style == 'layout_style_flower' %}
-	<link rel="stylesheet" data-href="{{ 'layout_style_flower.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'layout_style_flower.css' | asset_url }}">
 {% endif %}
 
 {% if settings.layout_style == 'layout_style_suppermarket' %}
-	<link rel="stylesheet" data-href="{{ 'layout_style_suppermarket.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'layout_style_suppermarket.css' | asset_url }}">
 {% endif %}
 
 {% if settings.layout_style == 'layout_style_surfup' %}
-	<link rel="stylesheet" data-href="{{ 'layout_style_surfup.css' | asset_url }}">
+	<link rel="stylesheet" href="{{ 'layout_style_surfup.css' | asset_url }}">
 {% endif %}
-<link rel="stylesheet" data-href="{{ 'custom.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">

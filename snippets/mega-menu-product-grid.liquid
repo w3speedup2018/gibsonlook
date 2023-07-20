@@ -52,7 +52,7 @@
   	<div class="product-top">
       <div class="product-image">
         <a href="{{ product.url | within: collection }}" class="product-grid-image" data-collections-related="{{ routes.collections_url }}/{{collection.handle}}?view=related">
-          <img class="lazyloaded lazy2 {{lazyload}}" data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-srcset="{{ product.featured_image.src | product_img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" data-sizes="auto" data-img>
+          <img data-srcset="{{ product.featured_image.src | product_img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" {% render 'lazyload' %}>
         </a>
       </div>
 

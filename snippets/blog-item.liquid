@@ -29,7 +29,7 @@
     {% if article.image %}
     {% assign image_alt = article.title | escape %}
     <div class="article-img">
-       {{ article | img_url: '1024x1024' | img_tag: image_alt, 'article__image lazy2 lazy3' | link_to: article.url | replace: '<a', '<a class="animate-scale"'  | replace: 'src=', 'data-src='}}
+       {{ article | img_url: '1024x1024' | img_tag: image_alt, 'article__image' | link_to: article.url | replace: '<a', '<a class="animate-scale"' }}
     </div>
     {% endif %}
 

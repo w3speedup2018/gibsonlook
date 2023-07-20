@@ -12,7 +12,7 @@
     {{ base_font_sem_bold | font_face : font_display: 'swap' }}
     {{ base_font_bold | font_face : font_display: 'swap' }}
 </style>
-<style type="lazyload2">
+<style>
     {% if settings.font == 'shopify_fonts' and settings.font_2 == 'shopify_fonts' %}
 
         {% assign base_font = settings.base_font_new | font_modify: 'weight', '400' %}

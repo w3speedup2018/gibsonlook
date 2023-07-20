@@ -76,13 +76,13 @@
                                 <div class="img">
                                     <a class="animate-scale " href="{{ block.settings.link }}">
                                         {%- assign img_url = block.settings.image | img_url: '600x800', crop: 'center' -%}
-                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-srcset="{{ block.settings.image | img_url: '600x800', crop: 'center' }}" alt="{{ block.settings.image.alt | default: shop.name }}" class="lazyloaded lazy2 lazy3" data-sizes="auto">
+                                        <img src="{{ block.settings.image | img_url: '600x800', crop: 'center' }}" alt="{{ block.settings.image.alt | default: shop.name }}" class="lazyload" data-sizes="auto">
                                     </a>
                                 </div>
                             {% else %}
                                 <a class="animate-scale " href="{{ block.settings.link }}">
                                     {%- assign img_url = block.settings.image | img_url: '600x800', crop: 'center' -%}
-                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-srcset="{{ block.settings.image | img_url: '600x800', crop: 'center' }}" alt="{{ block.settings.image.alt | default: shop.name }}" class="lazyloaded lazy2 lazy3" data-sizes="auto">
+                                    <img src="{{ block.settings.image | img_url: '600x800', crop: 'center' }}" alt="{{ block.settings.image.alt | default: shop.name }}" class="lazyload" data-sizes="auto">
                                 </a>
                             {% endif %}
                         {% else %}

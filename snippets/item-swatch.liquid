@@ -21,7 +21,7 @@
             {{color}}
         </div>
 
-        <label data-toggle="tooltip" {% if product.options_with_values.size == 1 %}data-with-one-option="{{variant.id}}" data-quantity="{% if variant.available %}1{% else %}0{% endif %}" data-price="{{ variant.price }}" data-compare_at_price="{{ variant.compare_at_price }}"{% endif %} class="lazybg {% if option_count == 0 %}active{% endif %} {% if product.options_with_values.size == 1 and variant.unavailable %}soldout{% endif %}" data-value="{{ text }}" data-title="{{color}}" title="{{color}}" data-id-product="{{variant.id}}" {% if variant.image != null %}  data-img="{{ variant.image.src | product_img_url: '800x' }}"{% endif %} style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=);" data-style="
+        <label data-toggle="tooltip" {% if product.options_with_values.size == 1 %}data-with-one-option="{{variant.id}}" data-quantity="{% if variant.available %}1{% else %}0{% endif %}" data-price="{{ variant.price }}" data-compare_at_price="{{ variant.compare_at_price }}"{% endif %} class=" {% if option_count == 0 %}active{% endif %} {% if product.options_with_values.size == 1 and variant.unavailable %}soldout{% endif %}" data-value="{{ text }}" data-title="{{color}}" title="{{color}}" data-id-product="{{variant.id}}" {% if variant.image != null %}  data-img="{{ variant.image.src | product_img_url: '800x' }}"{% endif %}  style="
           {%- if settings.color_swatch_style == 'variant' or settings.color_swatch_style == 'variant_grouped'-%}
             {%- if variant.image != null -%}
             {%- else -%}
@@ -38,7 +38,7 @@
           {% if settings.color_swatch_style =='variant' or settings.color_swatch_style == 'variant_grouped' %}
             {% if variant.image != null %}
               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-                 class="lazyloaded lazy2"
+                 class="lazyload"
                  data-src="{{ variant.image.src | product_img_url: '24x'}}"
                  data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
                  data-aspectratio="{{ variant.image.src | product_img_url: '24x'}}"
@@ -46,7 +46,7 @@
             {% else %}
               {% if settings.show_product_color_img %}
               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-                 class="lazyloaded lazy2"
+                 class="lazyload"
                  data-src="{{ text | append: '.png' | file_url }}"
                  data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
                  data-aspectratio="{{ text | append: '.png' | file_url }}"
@@ -56,7 +56,7 @@
           {% else %}
             {% if settings.show_product_color_img %}
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-                 class="lazyloaded lazy2 file_img"
+                 class="lazyload file_img"
                  data-src="{{ text | append: '.png' | file_url }}"
                  data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
                  data-aspectratio="{{ text | append: '.png' | file_url }}"

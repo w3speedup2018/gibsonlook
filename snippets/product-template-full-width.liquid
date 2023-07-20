@@ -17,9 +17,9 @@
                                 {% when 'image' %}
                                 <div class="thumb" id="variant-img-{{forloop.index }}">
                                     <a {% if section.settings.enable_zoom_image %}data-zoom{% endif %} class="fancybox" rel="gallery1" href="{{ media | img_url: 'master' }}" data-fancybox="images">
-                                        <img id="product-featured-image-{{media.id}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="{{ image.alt | escape }}"
-                                            class="lazyloaded lazy2 lazy3"
-                                            data-srcset="{{ media | img_url: '1512x' }} 1536w,{{ media | img_url: '720x' }} 1280w,{{ media | img_url: '540x' }} 768w,{{ media | img_url: '360x'}} 320w"
+                                        <img id="product-featured-image-{{media.id}}" alt="{{ image.alt | escape }}"
+                                            class="lazyload"
+                                            src="{{ media | img_url: '1512x' }}"
                                             data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
                                             data-aspectratio="{{ media | img_url: 'master' }}"
                                             data-sizes="auto">
@@ -138,7 +138,7 @@
                                 <div class="item" data-scrollDown-variantImg data-target="img-{{forloop.index }}">
                                     <div class="product-single__media" data-media-id="{{ media.id }}">
                                         <a href="#" data-image="{{ media.src | product_img_url: 'original' }}" data-zoom-image="{{ media.src | product_img_url: 'original' }}">
-                                            <img class="lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ media.src | product_img_url: 'compact' }}" alt="{{ media.alt | escape }}">
+                                            <img src="{{ media.src | product_img_url: 'compact' }}" alt="{{ media.alt | escape }}">
                                         </a>
                                     </div>
                                 </div>
@@ -662,7 +662,7 @@
 
                         {% if section.settings.display_trust_img and settings.img_trust != blank %}
                         <div class="secure-shopping-guarantee">
-                            <img class="lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ settings.img_trust | img_url: '800x'  }}">
+                            <img src="{{ settings.img_trust | img_url: '800x'  }}">
                         </div>
                         {% endif %}
 

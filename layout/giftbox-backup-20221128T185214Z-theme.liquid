@@ -6,13 +6,13 @@
 <!--[if (gt IE 9)|!(IE)]><!-->
 <html class="no-js"> <!--<![endif]-->
     <head>
-        <script type="lazyload2">
+        <script>
         /* >> TriplePixel :: start*/
         ~function(W,H,A,L,E){try{A.setItem(H,1+(0|A.getItem(H)||0)),W.includes("⇈")&&A.setItem(H+"Stg",1+(0|A.getItem(H+"Stg")||0))}catch(e){}function O(T,R){void 0===R&&(R=!1),H=new XMLHttpRequest,H.open("GET","//triplewhale-pixel.web.app/triplepx.txt?"+~(Date.now()/9e7),!0),H.send(null),H.onreadystatechange=function(){4===H.readyState&&200===H.status?setTimeout(function(){return eval(H.responseText)},50):(299<H.status||H.status<200)&&T&&!R&&(R=!0,O(T-1))}}A=window,A[H]||(L=function(){return"tp.."+Date.now().toString(36)+Math.random().toString(36)},E=A[H]=function(t,e,n){return W=L(),(E._q=E._q||[]).push([W,e,n]),W},E.ch=W,O(5))}("","TriplePixel",localStorage);
         /* << TriplePixel :: end*/
         </script>
       	<!-- Google Tag Manager -->
-        <script type="lazyload2">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -46,18 +46,14 @@
         <!-- Scripts -->
       	{% render 'jquery-min' %}
       	<!-- <script src="{{ 'jquery.min.js' | asset_url }}"></script> -->
-      	<script type="lazyload2" data-src="{{ 'jquery-cookie.min.js' | asset_url }}"></script>
-      	<script type="lazyload2" data-src="{{ 'lazysizes.min.js' | asset_url }}"></script>
+      	<script src="{{ 'jquery-cookie.min.js' | asset_url }}"></script>
+      	<script src="{{ 'lazysizes.min.js' | asset_url }}"></script>
         {% render 'head_scripts' %}
+        
         <!-- Header hook for plugins ================================ -->
-        {%- if request.design_mode or template contains 'cart' or template contains 'checkout' -%}
-            {{ content_for_header }}
-        {%- else -%}
-            {% capture content_for_header2 %}{{ content_for_header }}{% endcapture %}
-            {{ content_for_header2 | replace: ' defer="defer" ', ' type="lazyload2" ' | replace: " src=", " data-src=" | replace: "window.addEventListener('load', asyncLoad, false);", "window.addEventListener('wnw_load', asyncLoad, false);" | replace: "DOMContentLoaded", "DOMContentLoaded2" }}
-            <script>var trekkie=[];trekkie.integrations=!0;</script>
-        {%- endif -%}
-      	<script type="lazyload2" data-src="https://instafeed.nfcube.com/cdn/007ff992482c85a18b651cfe130c5ee8.js?shop=gibsonlook.myshopify.com"></script>
+        {{ content_for_header }}
+        
+      	<script src="https://instafeed.nfcube.com/cdn/007ff992482c85a18b651cfe130c5ee8.js?shop=gibsonlook.myshopify.com"></script>
       	{% if template contains 'customers' %}
         {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
         {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
@@ -68,7 +64,7 @@
         	<script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
         {% endif %}
         <!--Yotpo JavaScript-->
-        <script type="lazyload2">
+        <script>
         (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/xUup5qu0l5eD6kKszNXu6gCZuTf9wDNO0s4Zj6W3/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
         </script>
         <!--End of Yotpo JavaScript-->
@@ -87,7 +83,7 @@
         </script>
       	{% include 'sca.freegifts' %}
         <!-- BEGIN app block: shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507 -->
-      	<script type="lazyload2" data-src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=L4w2Qw"></script>	
+      	<script src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=L4w2Qw"></script>	
       	<!-- END app app block -->
 
         {% if settings.ss_enable %}
@@ -249,18 +245,18 @@
         {% render 'restock-alerts' %}
         <!-- Restock Alerts Snippet End -->
         <!--Gorgias Chat Widget Start-->
-      	<script id="gorgias-chat-widget-install-v2" type="lazyload2" data-src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=11630"></script>
+      	<script id="gorgias-chat-widget-install-v2" src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=11630"></script>
 		<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script><!--Gorgias Chat Widget End-->
   		{% render 'preorder-now' %}
        	<!-- Loop Returns -->
-      	<script type="lazyload2" data-src="https://unpkg.com/@loophq/onstore-sdk@latest/dist/loop-onstore-sdk.js"></script>
-        <script type="lazyload2"> 
+      	<script src="https://unpkg.com/@loophq/onstore-sdk@latest/dist/loop-onstore-sdk.js"></script>
+        <script> 
           LoopOnstore.init({ 
             key: "7066be1408dbbc4c4f76fd8687de11644c132112", 
             attach: ".btn-checkout" 
           });
         </script>
-        <script type="lazyload2">
+        <script>
           if (LoopOnstore.isActive()) {
             var paymentBtn = document.getElementsByClassName('shopify-payment-button');
             var shopPayInfo = document.getElementsByClassName('hc-shop-pay-installments');
@@ -347,5 +343,3 @@ var afterpay_js_snippet_version = '1.0.12';
 </script>
 <script type="text/javascript" src="https://static.afterpay.com/shopify-afterpay-javascript.js"></script>
 <!-- End Shopify-Afterpay JavaScript Snippet (v1.0.12) -->
-
-{{ 'wnw-optimization.js' | asset_url | script_tag }}

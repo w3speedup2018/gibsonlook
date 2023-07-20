@@ -38,9 +38,9 @@
           {%- assign img_12 = product.images[1].src | product_img_url: '400x' -%}
           
           {% if product.images.size > 1 and settings.image_swap %}
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="{{ product.images[0].alt | escape }}"
-               class="images-one lazyloaded lazy3 lazy2"
-               data-src="{{ img_0 }}"
+          <img alt="{{ product.images[0].alt | escape }}"
+               class="images-one lazyload"
+               src="{{ img_0 }}"
                data-srcie="{{ img_01 }}"
                data-srcief="{{ img_02 }}"
                data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
@@ -48,9 +48,9 @@
                data-sizes="auto">
 
           <span class="images-two">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="{{ product.images[1].alt | escape }}"
-                 class="lazyloaded lazy2"
-                 data-src="{{ img_1 }}"
+            <img alt="{{ product.images[1].alt | escape }}"
+                 class="lazyload"
+                 src="{{ img_1 }}"
                  data-srcie="{{ img_11 }}"
                  data-srcief="{{ img_12 }}"
                  data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
@@ -59,11 +59,11 @@
 
           </span>	
           {% else %}
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="{{ product.featured_image.alt | escape }}"             
-               data-src="{{ img_pr }}"
+          <img alt="{{ product.featured_image.alt | escape }}"             
+               src="{{ img_pr }}"
                data-srcie="{{ img_pr_1 }}"
                data-srcief="{{ img_pr_2 }}"
-               class="lazyloaded lazy2"
+               class="lazyload"
                data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
                data-aspectratio="{{ product.featured_image.aspect_ratio }}"
                data-sizes="auto">       

@@ -55,7 +55,7 @@
                         {%- assign img_url = block.settings.image_slide | img_url: 'master' -%}
                         <div class="adaptive_height {% if block.settings.image_slide_mb != blank %} slide-pc{% endif %}" style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
                             <a {% if block.settings.lb_product_1 != blank or block.settings.lb_product_2 != blank or block.settings.lb_product_3 != blank %}href="javascript:void(0)"{% else %}href="{{ block.settings.link }}"{% endif %} class="slide-image">
-                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-srcset="{{ block.settings.image_slide | img_url: '1512x' }} 1536w,{{ block.settings.image_slide | img_url: '1080x' }} 1280w,{{ block.settings.image_slide | img_url: '720x' }} 768w,{{ block.settings.image_slide | img_url: '360x'}} 320w" alt="{{ block.settings.image_slide.alt | default: shop.name }}" class="lazyloaded lazy2 lazy3" data-sizes="auto">
+                                <img src="{{ block.settings.image_slide | img_url: '1512x' }}" alt="{{ block.settings.image_slide.alt | default: shop.name }}" class="lazyload" data-sizes="auto">
                             </a>
                         </div>
 
@@ -71,7 +71,7 @@
                         {%- assign img_url_mb = block.settings.image_slide_mb | img_url: 'master' -%}
                         <div class="adaptive_height slide-mobile" style="padding-top: {{ 1 | divided_by: preview_img_mb.aspect_ratio | times: 100 }}%">
                             <a {% if block.settings.lb_product_1 != blank or block.settings.lb_product_2 != blank or block.settings.lb_product_3 != blank %}href="javascript:void(0)"{% else %}href="{{ block.settings.link }}"{% endif %} class="slide-image">
-                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-srcset="{{ block.settings.image_slide_mb | img_url: '540x' }} 768w,{{ block.settings.image_slide_mb | img_url: '360x'}} 320w" alt="{{ block.settings.image_slide_mb.alt | default: shop.name }}" class="lazyloaded lazy2 lazy3" data-sizes="auto">
+                                <img src="{{ block.settings.image_slide_mb | img_url: '540x' }}" alt="{{ block.settings.image_slide_mb.alt | default: shop.name }}" class="lazyload" data-sizes="auto">
                             </a>
                         </div>
                         {% endif %}

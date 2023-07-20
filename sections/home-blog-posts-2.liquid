@@ -41,7 +41,7 @@
                     {% if article.image %}
                     {% assign image_alt = article.title | escape %}
                     <a href="{{ article.url }}" class="article-img">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-srcset="{{ article | img_url: 'original' }}" alt="{{ image_alt }}" class="lazyloaded lazy3 lazy2" />
+                        <img src="{{ article | img_url: 'original' }}" alt="{{ image_alt }}" class="lazyload" />
                     </a>
                     {% endif %}
 

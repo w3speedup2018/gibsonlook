@@ -18,11 +18,11 @@
                 <div class="size-chart-img">
                     {% if settings.size_chart == 'product_vendor' %}          
                     {% capture img_vendor %}{{ product.vendor | handle | append: '-sizechart.jpg' | file_url }}{% endcapture %}
-                    <img class="size-chart-img-display lazy2" onError="style.display = 'none';" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ img_vendor }}" alt="{{ settings.custom_size_chart_header }}"/>
+                    <img class="size-chart-img-display" onError="style.display = 'none';" src="{{ img_vendor }}" alt="{{ settings.custom_size_chart_header }}"/>
                     
                     {% elsif settings.size_chart == 'product_type' %}          
                     {% capture img_type %}{{ product.type | handle | append: '-sizechart.jpg' | file_url }}{% endcapture %}
-                    <img class="size-chart-img-display lazy2" onError="style.display = 'none';" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ img_type }}" alt="{{ settings.custom_size_chart_header }}"/>
+                    <img class="size-chart-img-display" onError="style.display = 'none';" src="{{ img_type }}" alt="{{ settings.custom_size_chart_header }}"/>
                     
                     {% elsif settings.size_chart == 'different' %} 
                     {% if product.metafields.c_f.size_chart %}
@@ -31,7 +31,7 @@
                     {% endif %}
 
                     {% elsif settings.size_chart == 'none' %} 
-                    <img class="lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="{{ settings.custom_size_chart | img_url: 'master' }}" alt="{{ settings.custom_size_chart_header }}"/>
+                    <img src="{{ settings.custom_size_chart | img_url: 'master' }}" alt="{{ settings.custom_size_chart_header }}"/>
                     {% endif %}               
                 </div>
             </div>
